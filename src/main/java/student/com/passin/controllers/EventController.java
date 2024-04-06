@@ -2,11 +2,13 @@ package student.com.passin.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import student.com.passin.domain.event.Event;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+import student.com.passin.dto.attendee.AttendeesListResponseDTO;
+import student.com.passin.dto.event.EventIdDTO;
+import student.com.passin.dto.event.EventRequestDTO;
+import student.com.passin.dto.event.EventResponseDTO;
+import student.com.passin.services.AttendeeService;
 import student.com.passin.services.EventService;
 
 @RestController
@@ -14,10 +16,24 @@ import student.com.passin.services.EventService;
 @RequiredArgsConstructor
 public class EventController {
     private final EventService service;
+    private final AttendeeService attendeeService;
     @GetMapping("/{id}")
-    public ResponseEntity<String> getEvent(@PathVariable String id){
-        this.service.getEventDetail(id);
-        return ResponseEntity.ok("Sucess!");
+    public ResponseEntity<EventResponseDTO> getEvent(@PathVariable String id){
+        EventResponseDTO event = this.service.getEventDetail(id);
+        return ResponseEntity.ok(event);
+    }
+
+    @PostMapping
+    public ResponseEntity<EventIdDTO> createEvent(@RequestBody EventRequestDTO body, UriComponentsBuilder uriComponentsBuilder) {
+        EventIdDTO eventIdDTO = service.createEvent(body);
+        var uri = uriComponentsBuilder.path("/events/{id}").buildAndExpand(eventIdDTO.eventId()).toUri();
+        return ResponseEntity.created(uri).body(eventIdDTO);
+    }
+
+    @GetMapping("/attendees/{id}")
+    public ResponseEntity<AttendeesListResponseDTO> getEventAttendees(@PathVariable String id){
+        AttendeesListResponseDTO attendeesListResponse = attendeeService.getEventsAttendee(id);
+        return ResponseEntity.ok(attendeesListResponse);
     }
 
 }

@@ -29,7 +29,7 @@ SET FILES NIO TRUE
 SET FILES NIO SIZE 256
 SET FILES LOG TRUE
 SET FILES LOG SIZE 50
-SET FILES CHECK 715
+SET FILES CHECK 1897
 SET DATABASE COLLATION "SQL_TEXT" PAD SPACE
 CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER SA SET LOCAL TRUE
@@ -58,3 +58,7 @@ INSERT INTO "flyway_schema_history" VALUES(1,'1','create-table-events','SQL','V1
 INSERT INTO "flyway_schema_history" VALUES(2,'2','create-table-attendees','SQL','V2__create-table-attendees.sql',-24843440,'SA','2024-04-05 16:52:19.712350',22,'1')
 INSERT INTO "flyway_schema_history" VALUES(3,'3','create-table-checkins','SQL','V3__create-table-checkins.sql',-52053718,'SA','2024-04-05 16:52:19.729927',2,'1')
 INSERT INTO "flyway_schema_history" VALUES(4,'4','create-indexes','SQL','V4__create-indexes.sql',285228852,'SA','2024-04-05 16:52:19.740929',1,'1')
+INSERT INTO EVENTS VALUES('03f4bbe6-9dec-4f14-9b90-15d0f93d0407','NLWz','Next level week z','nlwz',700)
+INSERT INTO EVENTS VALUES('2bca7b1b-4e3a-45b2-ac3d-fed9654d7e17','SECS','Semana da Engenharia da computu\u00e7\u00e3o','secs',300)
+INSERT INTO EVENTS VALUES('7e8db8de-2aba-4a92-a7c9-0cd3b12206d9','NLW','Next level week','nlw',700)
+INSERT INTO ATTENDEES VALUES('7e8db8de-2aba-4a92-a7c9-0cd3b12206d9','Gildesio Araujo','gildesioaf@gmail.com','7e8db8de-2aba-4a92-a7c9-0cd3b12206d9',NULL)
