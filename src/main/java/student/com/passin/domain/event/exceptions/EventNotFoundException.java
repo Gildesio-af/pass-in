@@ -1,4 +1,4 @@
-package student.com.passin.domain.event.Exception;
+package student.com.passin.domain.event.exceptions;
 
 public class EventNotFoundException extends RuntimeException {
     public EventNotFoundException(String message) {
